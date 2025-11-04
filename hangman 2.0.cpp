@@ -12,7 +12,7 @@ string THE_WORD;
 int wrong = 0;
 string used = "";
 char userGuess;
-char userInput;
+string soFar;
 
 char guess(char guess);
 void check();
@@ -28,7 +28,7 @@ int main() {
 	srand (static_cast<unsigned int>(time(0)));
 	random_shuffle(words.begin(), words.end());
 	THE_WORD = words[0];
-	string soFar(THE_WORD.size(), '_');
+	soFar = string(THE_WORD.size(), '_');
 
 	cout << "Добро пожаловать в Висилецу. Удачи!\n";
 
@@ -36,6 +36,7 @@ int main() {
 		cout << "\n\nУ вас " << (MAX_WRONG - wrong);
 		cout << " допустимых ошибок.\n";
 		cout << "\nВы использовали слдедующие буквы:\n" << used << endl;
+		cout << "\nПока что слово:\n" << soFar << endl;
 
 		cout << "Введите букву: ";  cin >> userGuess;
 		
@@ -43,7 +44,6 @@ int main() {
 		used += userGuess;
 		
 		check();
-		cout << "\nПока что, слово:\n" << soFar << endl;
 	}
 
 	if (wrong == MAX_WRONG) {
@@ -68,7 +68,6 @@ char guess(char guess) {
 }
 
 void check() {
-	string soFar(THE_WORD.size(), '_');
 	if (THE_WORD.find(userGuess) != string::npos) {
 		cout << "Верно! " << userGuess << " есть в слове.\n";
 		for (int i = 0; i < THE_WORD.length(); ++i) {
